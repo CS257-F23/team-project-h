@@ -33,7 +33,10 @@ def setup(targetList) -> dict:
         print("data anomoly")
         return None
     
+
 def get_all(companyData):
+    for company in companyData.key():
+        print(company, ":", companyData[company])
     pass
 
 def get_by_company(companyData, arguments):
@@ -44,6 +47,12 @@ def get_by_company(companyData, arguments):
 
 def get_by_date(companyData, arguments):
     pass
+
+def get_help():
+    print("Hey, to print out stocks for a company, type in --get_by_company [company name]")
+    print("To print out stocks by date, type in --get_by_date [date]")
+    print("These are the possible company names: NFLX, GOOG, AMZN, MSFT, FB, GE, CMCSA, WFC, MAR, JPM")
+
 
 def main():
     #list of all company codes to be parsed
@@ -60,6 +69,8 @@ def main():
             get_by_company(companyData, arguments)
         elif arguments[1] == "--get_by_date":
             get_by_date(companyData, arguments)
+        elif arguments[1] == "--get_h":
+            get_help()
     except:
         print("error, please give more arguments")
 

@@ -1,6 +1,7 @@
 import sys
 import os
 
+
 def check(targetList) -> bool:
     companies = os.listdir("data/")
     companyList = []
@@ -33,19 +34,36 @@ def setup(targetList) -> dict:
         print("data anomoly")
         return None
     
+def print_data(companyData):
+    for companyName, data in companyData.items():
+        print(" ")
+        print(companyName + " Historical Stock Data")
+        for date, value in data.items():
+            print(date, ":", value)
+    
 
-def get_all(companyData):
+def get_all(companyData) -> dict:
     for company in companyData.key():
         print(company, ":", companyData[company])
     pass
 
-def get_by_company(companyData, arguments):
-    #companyData = {"company code" : historicalData}
-    #historicalData = {"20xx-xx-xx" : close value}
-    #arguments = [arg1, arg2,...]
-    pass
+def get_by_company(companyData, arguments) -> dict:
+    """Filters the all company stock data by company inputed by user
 
-def get_by_date(companyData, arguments):
+    Args:
+        companyData (dict): all company stock data
+        arguments (list): list of command line arguments
+
+    Returns:
+        dict: filtered dict of company data
+    """
+    filteredCompanyData = {}
+    for key in companyData:
+        if key in arguments:
+            filteredCompanyData[key] = companyData[key]
+    return filteredCompanyData
+
+def get_by_date(companyData, arguments) -> dict:
     pass
 
 def get_help():
@@ -66,7 +84,8 @@ def main():
         if arguments[1] == "--get_all":
             get_all(companyData)
         elif arguments[1] == "--get_by_company":
-            get_by_company(companyData, arguments)
+            data = get_by_company(companyData, arguments)
+            print_data(data)
         elif arguments[1] == "--get_by_date":
             get_by_date(companyData, arguments)
         elif arguments[1] == "--get_h":

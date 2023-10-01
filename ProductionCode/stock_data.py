@@ -64,7 +64,21 @@ def get_by_company(companyData, arguments) -> dict:
     return filteredCompanyData
 
 def get_by_date(companyData, arguments) -> dict:
-    pass
+    final = {}
+    dateList = arguments[2].split(",")
+    if len(dateList) < 1:
+        print("erroneous input")
+        return final
+    companies = companyData.keys()
+    for company in companies:
+        final[company] = {};
+    try:
+        for date in dateList:
+            for company in companies:
+                final[company][date] = companyData[company][date]
+    except:
+        print("erroneous data")
+    return final
 
 def get_help():
     print("Hey, to print out stocks for a company, type in --get_by_company [company name]")

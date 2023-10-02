@@ -49,7 +49,7 @@ class TestBasic_cl(unittest.TestCase):
         self.assertRaises(empty_data, get_all, empty_data)
         self.assertEqual(len(test_data), 10)
         
-    def test_get_help():
+    def test_get_help(self):
         '''Test to see if the get_help function runs '''
 
         self.assertEqual(get_help(), True)

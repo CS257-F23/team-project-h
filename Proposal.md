@@ -21,6 +21,45 @@ Some of the team members have experience building websites, so they are good res
 
 **What are the rules that will guide your team?** 
 
+**Features** 
+
+Feature: (**get\_all**) - get all historical stock data for each company.
+
+Usage: 
+
+`python3` `stock_data.py` `--get_all`
+
+Feature:  (**get\_by\_company**) - get all stock prices for one company, options for date and extra information
+
+Usage: 
+
+`python3` `stock_data.py` `--get_by_company` `“company1…”` `-date` `“date1,date2”` `-i`
+
+Feature: **(get\_by\_date)** - look up stock values on a specific date, option for extra information
+
+default: all companies by month
+
+Usage: 
+
+`python3` `stock_data.py` `--get_by_date` `“date”` `-i`
+
+Feature: **(get\_help)** - get help on how to use the previous features 
+
+Usage:
+
+&#x20;`python3` `stock_data.py` `–h`
+
+**How user can interact with the data** 
+
+Users will be able to look up specific stock information based on a company or date they are interested in. 
+
+- Devin is in charge of get\_by\_company
+- Dexter is in charge of get\_by\_date 
+- Lucy and Alisa are in charge of get\_all and get\_help 
+- We will work together to load and organize the data and to implement the main function. 
+
+<!---->
+
 - We plan to meet every week on Tuesday at 2 p.m for an hour. 
 - We also have a Discord server to give each other quick updates or set up more time to meet. Communication on the server will be more professional than casual to ensure respectfulness.
 - Every member will send updates every Thursday and Sunday nights on Discord about what they’ve worked on. 
@@ -30,7 +69,7 @@ Some of the team members have experience building websites, so they are good res
 - When features are pushed onto github, members of the group will double-check that it does not interfere with previous functions, and Devin will be in charge of the final quality control. 
 - Alisa will be in charge of making sure we don’t miss revision windows. 
 - If a group member is not participating satisfactorily or if there are conflicts and disagreements, then there will first be a group call, and later communication with Anya regarding the matter if it cannot be resolved. 
-- If someone needs help, they will send a help sticker in the Discord. 
+- If someone needs help, they will send a help sticker in the Discord.
 
 **Metadata on our dataset**
 
@@ -52,7 +91,7 @@ Oleh Onyshchak
 Collected via <https://www.kaggle.com/jacksoncrow/download-nasdaq-historical-data>
 
 
-##### License [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
+##### License: [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ##### Expected Update Frequency
 

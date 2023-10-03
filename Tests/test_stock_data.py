@@ -15,11 +15,28 @@ class TestBasic_cl(unittest.TestCase):
 
         test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
         arguments = ["NFLX", "AMZN"]
-        filteredData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
+        filteredData = {"NFLX" : {'2020-04-01' : "1q11", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
 
         data = get_by_company(test_company_data, arguments)
 
         self.assertEqual(data, filteredData)
+
+    def test_get_by_date(self):
+        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
+        arguments = ["2020-04-01"]
+        filteredData = {"NFLX" : {'2020-04-01' : "111"},"GOOG" : {'2020-04-01' : "111"}, "AMZN" : {'2020-04-01' : "111"}}
+        
+        data = get_by_date(test_company_data, arguments)
+
+        self.assertEqual(data, filteredData)
+
+    def test_edge_get_by_date(self):
+        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
+        arguments = ["not a date"]
+        
+        data = get_by_date(test_company_data, arguments)
+
+        self.assertEqual(data, None)
 
     def test_print_data(self):
         """Test to check the data is printed correctly"""

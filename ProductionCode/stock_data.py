@@ -89,7 +89,7 @@ def get_by_date(companyData, arguments) -> dict:
             for company in companies:
                 final[company][date] = companyData[company][date]
     except:
-        print("erroneous data")
+        return None
     return final
 
 def get_help():

@@ -103,6 +103,7 @@ def get_help():
     print("These are the possible company names: NFLX, GOOG, AMZN, MSFT, FB, GE, CMCSA, WFC, MAR, JPM")
     print("This is the possible data range: 2019-04-01 - 2020-04-01.")
     print("")
+    return True
 
 
 def main():

@@ -43,10 +43,10 @@ class TestBasic_cl(unittest.TestCase):
         test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
         empty_data = {}
         companyData = {}
-        test_data = get_all(load(["NTFX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"], companyData))
+        test_data = get_all(load(["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"], companyData))
 
         self.assertEqual(get_all(test_company_data), test_company_data)
-        self.assertRaises(empty_data, get_all, empty_data)
+        self.assertEqual(get_all(empty_data), empty_data)
         self.assertEqual(len(test_data), 10)
         
     def test_get_help(self):

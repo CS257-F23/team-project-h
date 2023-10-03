@@ -77,7 +77,10 @@ def get_by_date(companyData, arguments) -> dict:
     This function returns the values on a specific date for all the 10 companies. 
     """
     final = {}
-    dateList = arguments[2].split(",")
+    try:
+        dateList = arguments[2].split(",")
+    except:
+        return None
     if len(dateList) < 1:
         print("erroneous input")
         return final

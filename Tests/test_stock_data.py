@@ -23,7 +23,7 @@ class TestBasic_cl(unittest.TestCase):
 
     def test_get_by_date(self):
         test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
-        arguments = ["2020-04-01"]
+        arguments = ["blank", "blank", "2020-04-01"]
         filteredData = {"NFLX" : {'2020-04-01' : "111"},"GOOG" : {'2020-04-01' : "111"}, "AMZN" : {'2020-04-01' : "111"}}
         
         data = get_by_date(test_company_data, arguments)
@@ -32,7 +32,7 @@ class TestBasic_cl(unittest.TestCase):
 
     def test_edge_get_by_date(self):
         test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
-        arguments = ["not a date"]
+        arguments = ["blank", "blank", "not a date"]
         
         data = get_by_date(test_company_data, arguments)
 

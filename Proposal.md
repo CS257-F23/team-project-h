@@ -12,7 +12,7 @@
 
 - Devin: I am familiar with HTML, and CSS, but not Python.
 - Dexter: Python, flask, data visualization, and database modeling. 
-- Lucy: I am a good listener and I am willing to resolve disagreements. I am also pretty confident in my learning ability.  
+- Lucy: I am a good listener and I am willing to resolve disagreements. I am also pretty confident in my learning ability.   test.
 - Alisa: I have good artistic skills and am good at making artistic decisions. 
 
 **How will we capitalize on the strengths of each member?**

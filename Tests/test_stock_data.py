@@ -54,6 +54,23 @@ class TestBasic_cl(unittest.TestCase):
         self.assertIn(expected_company2, output.strip())
 
         code.terminate()
+    
+    def test_get_all(self):
+        '''Test to see if the function returns the entire dataset'''
+        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
+        empty_data = {}
+        companyData = {}
+        test_data = get_all(load(["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"], companyData))
+
+        self.assertEqual(get_all(test_company_data), test_company_data)
+        self.assertEqual(get_all(empty_data), empty_data)
+        self.assertEqual(len(test_data), 10)
+        
+    def test_get_help(self):
+        '''Test to see if the get_help function runs '''
+
+        self.assertEqual(get_help(), True)
+
 
 
 if __name__ == '__main__':

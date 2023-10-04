@@ -87,12 +87,12 @@ def get_by_date(companyData, arguments) -> dict:
     companies = companyData.keys()
     for company in companies:
         final[company] = {}
-    try:
-        for date in dateList:
-            for company in companies:
-                final[company][date] = companyData[company][date]
-    except:
-        return None
+        try:
+            for date in dateList:
+                for company in companies:
+                    final[company][date] = companyData[company][date]
+        except:
+            return None
     return final
 
 def get_help():

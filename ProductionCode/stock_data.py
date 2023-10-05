@@ -5,12 +5,8 @@ import os
 Check, load, and setup functions are used to load the data from the Data subdictionary 
 """
 def check(targetList) -> bool:
-    companies = os.listdir("Data/")
-    companyList = []
-    for company in companies:
-        companyList.append(company.split(".")[0])
-    for target in targetList:
-        if target not in companyList:
+    for company in os.listdir("Data/"):
+        if company.split(".")[0] not in targetList:
             return False
     return True
 
@@ -27,7 +23,8 @@ def load(targetList, companyData) -> dict:
         companyData[target] = company
     return companyData
 
-def setup(targetList) -> dict:
+def setup() -> dict:
+    targetList = ["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"]
     if check(targetList):
         companyData = {}
         load(targetList, companyData)
@@ -111,8 +108,7 @@ def get_help():
 
 def main():
     #list of all company codes to be parsed
-    targetList = ["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"]
-    companyData = setup(targetList)
+    companyData = setup()
     if companyData == None:
         return
 

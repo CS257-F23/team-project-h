@@ -4,129 +4,130 @@ import os
 """""
 Check, load, and setup functions are used to load the data from the Data subdictionary 
 """
-def check(targetList) -> bool:
-    for company in os.listdir("Data/"):
-        if company.split(".")[0] not in targetList:
-            return False
-    return True
 
-def load(targetList, companyData) -> dict:
-    for target in targetList:
-        company = {}
-        dates = ((open("Data/"+target+".csv", "r")).read()).split("\n")
-        for date in dates:
-            try:
-                date = date.split(",")
-                company[date[0]] = date[4]
-            except:
-                pass
-        companyData[target] = company
-    return companyData
+def load() -> dict:
+    """ This creates the overall dictionary of target companies 
 
-def setup() -> dict:
+    Returns:
+        dict: _description_
+    """
     targetList = ["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"]
-    if check(targetList):
-        companyData = {}
-        load(targetList, companyData)
-        return companyData
-    else:
-        print("data anomoly")
-        return None
-    
-def print_data(companyData):
+    allCompaniesData = {}
+    for target in targetList:
+        dates = ((open("Data/"+target+".csv", "r")).read()).split("\n")
+        allCompaniesData[target] = load_helper(dates)
+    return allCompaniesData
+
+
+def load_helper(dates):
+    """  
+
+    Returns:
+        dict: _description_
+    """
+    company = {}
+    for date in dates:
+        date = date.split(",")
+        company[date[0]] = (date[4], date[6])
+    return company
+
+
+def print_data(allCompaniesData):
     """
     This function is used to print the data in the main function. 
     """
-    for companyName, data in companyData.items():
+    if allCompaniesData == None:
+        return 
+    for companyName, data in allCompaniesData.items():
         print(" ")
         print(companyName + " Historical Stock Data")
         for date, value in data.items():
             print(date, ":", value)
     
 
-def get_all(companyData) -> dict:
+def get_all(allCompaniesData):
     """
     This returns all the data stored in company data for all companies and all dates.   
     """
-    if len(companyData) == 0:
-        print("Please check your Data file. The dictionary is empty!")
-    return companyData
+    print_data(allCompaniesData)
 
 
-def get_by_company(companyData, arguments) -> dict:
+def get_by_company(allCompaniesData, arguments) -> dict:
     """Filters the all company stock data by company inputed by user
 
     Args:
-        companyData (dict): all company stock data
+        allCompaniesData (dict): all company stock data
         arguments (list): list of command line arguments
 
     Returns:
         dict: filtered dict of company data
     """
     filteredCompanyData = {}
-    for key in companyData:
+    for key in allCompaniesData:
         if key in arguments:
-            filteredCompanyData[key] = companyData[key]
+            filteredCompanyData[key] = allCompaniesData[key]
     return filteredCompanyData
 
-def get_by_date(companyData, arguments) -> dict:
+
+def get_by_date(allCompaniesData, arguments) -> dict: 
+    """ This function returns the values on a specific date for all the 10 companies. """ 
+    if len(arguments) < 3:
+        print("Please enter a specific date you want to see stocks for. If you want to see multiple dates, connect them by a comma :)")
+        return
+    filteredCompanyData = {} 
+    for company in allCompaniesData: 
+        filteredCompanyData[company] = {}
+        get_by_date_helper(allCompaniesData, company, arguments, filteredCompanyData)
+    return filteredCompanyData
+
+
+def get_by_date_helper(allCompaniesData, company, arguments, filteredCompanyData):
+    """This helps handle if the user inputs multiple dates 
+
+    Args:
+        allCompaniesData (_type_): _description_
+        company (_type_): _description_
+        arguments (_type_): _description_
+        filteredallCompaniesData (_type_): _description_
     """
-    This function returns the values on a specific date for all the 10 companies. 
-    """
-    final = {}
-    try:
-        dateList = arguments[2].split(",")
-    except:
-        return None
-    if len(dateList) < 1:
-        print("erroneous input")
-        return final
-    companies = companyData.keys()
-    for company in companies:
-        final[company] = {}
-        try:
-            for date in dateList:
-                for company in companies:
-                    final[company][date] = companyData[company][date]
-        except:
-            return None
-    return final
+
+    for date in allCompaniesData[company]:
+        for date in arguments[2].split(","): 
+            filteredCompanyData[company][date] = allCompaniesData[company][date]
+
 
 def get_help():
     """
     This function helps the user use the app. 
     """
-    print("")
-    print("¯\_(ツ)_/¯")
-    print("Hey! To print out stocks for a specific company, type in --get_by_company [company name]")
-    print("To print out stocks by a specific date, type in --get_by_date [date]")
-    print("These are the possible company names: NFLX, GOOG, AMZN, MSFT, FB, GE, CMCSA, WFC, MAR, JPM")
-    print("This is the possible data range: 2019-04-01 - 2020-04-01.")
-    print("")
+    print("\n¯\_(ツ)_/¯ \n Hey! To print out stocks for a specific company, type in --get_by_company [company name]" +
+        "\n To print out stocks by a specific date, type in --get_by_date [date]" +
+        "\n These are the possible company names: NFLX, GOOG, AMZN, MSFT, FB, GE, CMCSA, WFC, MAR, JPM" +
+        "\n This is the possible data range: 2019-04-01 - 2020-04-01.\n")
     return True
 
 
 def main():
     #list of all company codes to be parsed
-    companyData = setup()
-    if companyData == None:
-        return
+    data = {}
+    allCompaniesData = load()
 
     arguments = sys.argv
-    try:
-        if arguments[1] == "--get_all":
-            data = get_all(companyData)
-            print_data(data)
-        elif arguments[1] == "--get_by_company":
-            data = get_by_company(companyData, arguments)
-            print_data(data)
-        elif arguments[1] == "--get_by_date":
-            data = get_by_date(companyData, arguments)
-            print_data(data)
-        elif arguments[1] == "--get_h" or "--get_help":
+
+    if len(arguments) < 2:
+        print("Bad input. Please type in --get_h to see your options!")
+        return
+
+    match arguments[1]:
+        case "--get_h":
             get_help()
-    except:
-        print("Error. Please give more arguments. You can call the --get_help function to see what arguments to include.")
+        case "--get_all":
+            get_all(allCompaniesData)
+        case "--get_by_company":
+            data = get_by_company(allCompaniesData, arguments)
+        case "--get_by_date":
+            data = get_by_date(allCompaniesData, arguments)
+    print_data(data)
 
 if __name__ == "__main__":
     main()

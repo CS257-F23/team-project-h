@@ -26,9 +26,9 @@ def load_helper(dates):
         dict: _description_
     """
     company = {}
-    for date in dates:
-        date = date.split(",")
-        company[date[0]] = (date[4], date[6])
+    for rowOfData in dates:
+        rowOfData = rowOfData.split(",")
+        company[rowOfData[0]] = rowOfData[4]
     return company
 
 
@@ -37,7 +37,7 @@ def print_data(allCompaniesData):
     This function is used to print the data in the main function. 
     """
     if allCompaniesData == None:
-        return 
+        return None
     for companyName, data in allCompaniesData.items():
         print(" ")
         print(companyName + " Historical Stock Data")
@@ -50,6 +50,7 @@ def get_all(allCompaniesData):
     This returns all the data stored in company data for all companies and all dates.   
     """
     print_data(allCompaniesData)
+    return allCompaniesData
 
 
 def get_by_company(allCompaniesData, arguments) -> dict:
@@ -73,7 +74,8 @@ def get_by_date(allCompaniesData, arguments) -> dict:
     """ This function returns the values on a specific date for all the 10 companies. """ 
     if len(arguments) < 3:
         print("Please enter a specific date you want to see stocks for. If you want to see multiple dates, connect them by a comma :)")
-        return
+        return None
+    
     filteredCompanyData = {} 
     for company in allCompaniesData: 
         filteredCompanyData[company] = {}
@@ -91,10 +93,11 @@ def get_by_date_helper(allCompaniesData, company, arguments, filteredCompanyData
         filteredallCompaniesData (_type_): _description_
     """
 
-    for date in allCompaniesData[company]:
-        for date in arguments[2].split(","): 
+    for date in arguments[2].split(","): 
+        if date in allCompaniesData[company]:
             filteredCompanyData[company][date] = allCompaniesData[company][date]
-
+        else:
+            print("Oops! Invalid Date" + str(date))
 
 def get_help():
     """
@@ -107,16 +110,15 @@ def get_help():
     return True
 
 
-def main():
+def main(arguments):
     #list of all company codes to be parsed
     data = {}
     allCompaniesData = load()
 
-    arguments = sys.argv
 
     if len(arguments) < 2:
         print("Bad input. Please type in --get_h to see your options!")
-        return
+        return None
 
     match arguments[1]:
         case "--get_h":
@@ -130,4 +132,4 @@ def main():
     print_data(data)
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)

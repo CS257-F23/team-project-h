@@ -72,9 +72,6 @@ def get_by_company(allCompaniesData, arguments) -> dict:
 
 def get_by_date(allCompaniesData, arguments) -> dict: 
     """ This function returns the values on a specific date for all the 10 companies. """ 
-    if len(arguments) < 3:
-        print("Please enter a specific date you want to see stocks for. If you want to see multiple dates, connect them by a comma :)")
-        return None
     
     filteredCompanyData = {} 
     for company in allCompaniesData: 
@@ -93,7 +90,7 @@ def get_by_date_helper(allCompaniesData, company, arguments, filteredCompanyData
         filteredallCompaniesData (_type_): _description_
     """
 
-    for date in arguments[2].split(","): 
+    for date in arguments: 
         if date in allCompaniesData[company]:
             filteredCompanyData[company][date] = allCompaniesData[company][date]
         else:

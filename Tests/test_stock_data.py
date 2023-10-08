@@ -1,5 +1,4 @@
 from ProductionCode.stock_data import *
-from test_data import *
 import unittest
 import subprocess
 import imp
@@ -33,7 +32,7 @@ class TestBasic_cl(unittest.TestCase):
 
     def test_get_by_date(self):
         '''This tests that get by date returns stock data for all companies on a specific date'''
-        arguments = ["blank", "blank", "2020-04-01"] 
+        arguments = ["2020-04-01"] 
         filteredData = {"NFLX" : {'2020-04-01' : "111"},
                         "GOOG" : {'2020-04-01' : "111"}, 
                         "AMZN" : {'2020-04-01' : "111"}}
@@ -45,15 +44,12 @@ class TestBasic_cl(unittest.TestCase):
 
     def test_edge_get_by_date(self):
         '''This tests if a user puts in invalid input for a date '''
-        arguments = ["blank", "blank", "not a date"]
+        arguments = ["not a date"]
         filteredData = {'NFLX': {}, 'GOOG': {}, 'AMZN': {}} 
         
         data = get_by_date(self.testData, arguments)
 
         self.assertEqual(data, filteredData)
-
-    def test_edge2_get_by_date(self):
-        self.assertEqual(None, get_by_date(self.testData, [1]))
 
     def test_print_data(self):
         """Test to check the data is printed correctly"""

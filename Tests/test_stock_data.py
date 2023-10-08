@@ -6,37 +6,51 @@ import subprocess
 
 class TestBasic_cl(unittest.TestCase):
 
-    # def setUp(self):
-    #     targetList = ["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"]
-    #     companyData = setup(targetList)
-
+    ''' testData is the smaller dataset we will be testing on'''
+    testData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},
+             "GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
+             "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
+    
     def test_get_by_company(self):
         """Test to check the data is filtered by company correctly"""
-
-        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
         arguments = ["NFLX", "AMZN"]
-        filteredData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
+        filteredData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
+                        "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
 
-        data = get_by_company(test_company_data, arguments)
+        data = get_by_company(self.testData, arguments)
 
         self.assertEqual(data, filteredData)
+
+    def test_false_company(self):
+        "This tests if an incorrect name is passed into get by company"
+        arguments = "BOB"
+
+        data = get_by_company(self.testData, arguments)
+
+        self.assertEqual(data, {})
+
 
     def test_get_by_date(self):
-        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
-        arguments = ["blank", "blank", "2020-04-01"]
-        filteredData = {"NFLX" : {'2020-04-01' : "111"},"GOOG" : {'2020-04-01' : "111"}, "AMZN" : {'2020-04-01' : "111"}}
+        '''This tests that get by date returns stock data for all companies on a specific date'''
+        arguments = ["blank", "blank", "2020-04-01"] 
+        filteredData = {"NFLX" : {'2020-04-01' : "111"},
+                        "GOOG" : {'2020-04-01' : "111"}, 
+                        "AMZN" : {'2020-04-01' : "111"}}
         
-        data = get_by_date(test_company_data, arguments)
+        data = get_by_date(self.testData, arguments)
 
         self.assertEqual(data, filteredData)
 
-    def test_edge_get_by_date(self):
-        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
-        arguments = ["blank", "blank", "not a date"]
-        
-        data = get_by_date(test_company_data, arguments)
 
-        self.assertEqual(data, None)
+    def test_edge_get_by_date(self):
+        '''This tests if a user puts in invalid input for a date '''
+        arguments = ["blank", "blank", "not a date"]
+        filteredData = {'NFLX': {}, 'GOOG': {}, 'AMZN': {}} 
+        
+        data = get_by_date(self.testData, arguments)
+
+        self.assertEqual(data, filteredData)
+
 
     def test_print_data(self):
         """Test to check the data is printed correctly"""
@@ -55,17 +69,27 @@ class TestBasic_cl(unittest.TestCase):
 
         code.terminate()
     
+
     def test_get_all(self):
         '''Test to see if the function returns the entire dataset'''
-        test_company_data = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},"GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
-        empty_data = {}
-        companyData = {}
-        test_data = get_all(load(["NFLX", "GOOG", "AMZN", "MSFT", "FB", "GE", "CMCSA", "WFC", "MAR", "JPM"], companyData))
+        test_data = get_all(self.testData)
 
-        self.assertEqual(get_all(test_company_data), test_company_data)
+        self.assertEqual(test_data, self.testData)
+
+
+    def test_get_all_empty_data(self):
+        '''This tests an empty data set'''
+        empty_data = {}
+
         self.assertEqual(get_all(empty_data), empty_data)
-        self.assertEqual(len(test_data), 10)
+
+
+    def test_load_data(self):
+        '''This tests load on the the entire data set'''
+
+        self.assertEqual(len(load()), 10)
         
+
     def test_get_help(self):
         '''Test to see if the get_help function runs '''
 

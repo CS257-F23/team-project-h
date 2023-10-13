@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Chartjs Charts</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div style="height: 50vh; width: 50%;">
+        <a href="/">Home</a>
+        <canvas id="myChart"></canvas>
+    </div>
+ 
+    <script>
+        const labels = {{ labels | tojson}};
+ 
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Netflix Stock Data',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: {{ data | tojson}},
+            }]
+        };
+ 
+        const config = {
+            type: 'line',
+            data: data,
+            options: { maintainAspectRatio: false }
+        };
+ 
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+ 
+    </script>
+  </body>
+</html>

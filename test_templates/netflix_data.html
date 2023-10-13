@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Neflix Data</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='netflix_data.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navleft">
+        <a href="/">Home</a>
+      </div>
+      <div class="navright">
+        <a href="/data">Data</a>
+        <a href="/help">Help</a>
+      </div>
+    </nav>
+    <div class="main">
+        <h1>Stock Data</h1>
+        <h1>Here's how easy it is to show a pandas dataframe!</h1>
+8	    {% for table in table %} 
+9	    {{ table|safe }} 
+10	    {% endfor %}
+    </div>
+    
+  </body>
+</html>

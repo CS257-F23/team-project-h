@@ -31,3 +31,6 @@ class TestFlask(unittest.TestCase):
         self.app = app.test_client()
         response = self.app.delete('/', follow_redirects=True)
         self.assertIn(b"405 Method Not Allowed", response.data)
+
+if __name__ == "__main__":
+    unittest.main()

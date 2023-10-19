@@ -1,6 +1,8 @@
 body {
   font-family: Verdana, Geneva, sans-serif;
   line-height: 1.4;
+  margin: 0px;
+  background-color: rgb(217, 201, 250);
 }
 
 nav {
@@ -14,8 +16,9 @@ nav {
   width: 100%;
 }
 
-nav a {
+a {
   color: #ffffff;
+  background-color: rgb(128, 161, 191);
   padding: 14px 16px;
   margin-bottom: 20px;
   text-decoration: none;
@@ -47,11 +50,23 @@ div.navright {
   flex: 1;
 }
 
-nav a:hover {
+div.buttons {
+  display: grid;
+  grid-gap: 5px;
+  margin: 0% 40% 0% 40%;
+}
+
+a:hover {
   background: #ffffff;
   color: #008fa1;
 }
 
 .main {
   margin-top: 5em;
+  text-align: center;
+}
+
+h1,
+h2 {
+  color: white;
 }

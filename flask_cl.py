@@ -1,7 +1,9 @@
-from flask import Flask, render_template
-from ProductionCode.stock_data import *
+from flask import Flask, render_template, request, redirect
+from ProductionCode.cl import *
 
 app = Flask(__name__)
+
+Stock = Stocks()
 
 def isEmpty(data):
     if len(data) == 0:
@@ -10,27 +12,32 @@ def isEmpty(data):
 
 @app.route("/")
 def homepage():
-    return render_template('homepage.html')
+    return render_template('index.html')
 
 @app.route("/get_help")
 def get_help():
     return render_template('help.html')
 
-@app.route("/get_company/<companyList>")
-def get_company(companyList):
-    allCompaniesData = load()
-    data = get_by_company(allCompaniesData, companyList.split(","))
-    if isEmpty(data):
-        return render_template("error.html")
-    return render_template('display.html', companyData = data)
+@app.route("/research", methods=("GET", "POST"))
+def research():
+    if request.method == "POST":
+        userIn = request.form
+        userCompany = []
+        for company in userIn:
+            if len(userIn[company]) <= 5:
+                userCompany.append(userIn[company])
+            else: #to add in dates
+                pass
+        displayData = Stock.get_by_company(userCompany)
+        return render_template("research.html", companyData = displayData)
+    return render_template('research.html')
 
 @app.route("/get_date/<dateList>")
 def get_date(dateList):
-    allCompaniesData = load()
-    data = get_by_date(allCompaniesData, dateList.split(","))
+    data = Stock.get_by_date(dateList.split(","))
     if isEmpty(data):
         return render_template("error.html")
-    return render_template('display.html', companyData = data)
+    return render_template('research.html', companyData = data)
 
 
 @app.errorhandler(404)

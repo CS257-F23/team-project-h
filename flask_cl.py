@@ -22,14 +22,20 @@ def get_help():
 def research():
     if request.method == "POST":
         userIn = request.form
-        userCompany = []
-        for company in userIn:
-            if len(userIn[company]) <= 5:
-                userCompany.append(userIn[company])
-            else: #to add in dates
-                pass
-        displayData = Stock.get_by_company(userCompany)
-        return render_template("research.html", companyData = displayData)
+        companies = []
+        dates = []
+        for inp in userIn:
+            if "company" in inp:
+                companies.append(userIn[inp])
+            else:
+                dates = userIn[inp].split(",")
+                if "" in dates:
+                    dates.remove("")
+        displayData = Stock.get_by_company(companies)
+        if len(dates) >= 1:
+            displayData = Stock.get_by_date(dates, displayData)
+        if len(companies) >= 1:
+            return render_template("research.html", companyData = displayData, company=companies[0])
     return render_template('research.html')
 
 @app.route("/get_date/<dateList>")
@@ -49,4 +55,4 @@ def bug(e):
     return render_template('error.html')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

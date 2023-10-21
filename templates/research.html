@@ -22,17 +22,43 @@
     </div>
     <div class="grid-item form-content">
       <form method="post">
+        <input type="checkbox" id="company2" name="company2" value="AMZN" />
+        <label for="company2">AMZN</label><br />
 
-        <input type="checkbox" id="NFLX" name="NFLX" value="NFLX" />
-        <label for="NFLX">Netflix Inc</label><br />
-        <input type="checkbox" id="GOOG" name="GOOG" value="GOOG" />
-        <label for="GOOG">bad boy Inc</label><br />
+        <input type="checkbox" id="company3" name="company3" value="CMCSA" />
+        <label for="company3">CMCSA</label><br />
 
+        <input type="checkbox" id="company4" name="company4" value="FB" />
+        <label for="company4">FB</label><br />
+
+        <input type="checkbox" id="company5" name="company5" value="GE" />
+        <label for="company5">GE</label><br />
+
+        <input type="checkbox" id="company6" name="company6" value="GOOG" />
+        <label for="company6">GOOG</label><br />
+
+        <input type="checkbox" id="company7" name="company7" value="JPM" />
+        <label for="company7">JPM</label><br />
+
+        <input type="checkbox" id="company8" name="company8" value="MAR" />
+        <label for="company8">MAR</label><br />
+
+        <input type="checkbox" id="company9" name="company9" value="MSFT" />
+        <label for="company9">MSFT</label><br />
+
+        <input type="checkbox" id="company10" name="company10" value="NFLX" />
+        <label for="company10">NFLX</label><br />
+
+        <input type="checkbox" id="company11" name="company11" value="WFC" />
+        <label for="company11">WFC</label><br />
+
+        <textarea name="dates" placeholder="write dates here"></textarea>
 
         <button type="submit">Submit</button>
       </form>
     </div>
     <div class="grid-item data-content">
+      {% if companyData is defined %}
       <table class="data-table">
         <thead>
           <tr>
@@ -43,32 +69,25 @@
           </tr>
         </thead>
         <tbody>
-          {% for company in companyData %}
-          <td>
-            {%for key in companyData[company] %}
+          {% for date in companyData[company] %}
           <tr>
-            <td>
-              <h3>{{ key }}</h3>
-            </td>
-            <td>
-              <h3>{{ companyData[company][key] }}</h3>
-            </td>
+            <td>{{ date}}</td>
+            {% for companies in companyData %}
+            <td>{{ companyData[companies][date]}}</td>
+            {% endfor %}
           </tr>
           {% endfor %}
-          </td>
-          {% endfor %}
+        
+      
+          
+        
         </tbody>
       </table>
+      {% else %}
       <h1>Select company to display table</h1>
+      {% endif%}
     </div>
   </div>
 </body>
 
 </html>
-
-<!-- {% for key, value in company: %}
-              <tr>
-                <td>{{ key }}</td>
-                <td>{{ value }}</td>
-              </tr>
-              {% endfor %}  -->

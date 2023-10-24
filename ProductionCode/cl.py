@@ -110,3 +110,24 @@ class Stocks():
             "\n These are the possible company names: NFLX, GOOG, AMZN, MSFT, FB, GE, CMCSA, WFC, MAR, JPM" +
             "\n This is the possible data range: 2019-04-01 - 2020-04-01.\n")
         return True
+    
+    def predict(self, userIn):
+        """This function predicts how much the stocks will earn/lose based on user investment.
+
+        Args:
+            userIn (dict): User investment input
+
+        Returns:
+            tuple: returns the initial investment amount, final investment amount, and the difference.
+        """
+        initial = 0.0
+        final = 0.0
+        if userIn == None:
+            return None
+        for companyValue in userIn:
+            if userIn[companyValue].isdigit():
+                initial += float(userIn[companyValue])
+                factor = float(self.allCompaniesData[companyValue]["2020-04-01"]) / float(self.allCompaniesData[companyValue]["2019-04-01"])
+                final += float(userIn[companyValue]) * factor
+        final = round(final, 2)
+        return (initial, final, final-initial)

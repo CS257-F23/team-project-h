@@ -1,5 +1,5 @@
 import unittest
-from flask_cl import *
+from flask_app import *
 
 class TestFlask(unittest.TestCase):
     def test_route_homepage(self):

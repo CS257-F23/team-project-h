@@ -38,12 +38,13 @@ def research():
             return render_template("research.html", companyData = displayData, company=companies[0])
     return render_template('research.html')
 
-@app.route("/get_date/<dateList>")
-def get_date(dateList):
-    data = Stock.get_by_date(dateList.split(","))
-    if isEmpty(data):
-        return render_template("error.html")
-    return render_template('research.html', companyData = data)
+@app.route("/play", methods=("GET", "POST"))
+def play():
+    if request.method == "POST":
+        userIn = request.form
+        values = Stock.predict(userIn)
+        return render_template("play.html", start=values[0], end=values[1], difference=values[2])
+    return render_template('play.html')
 
 
 @app.errorhandler(404)

@@ -1,13 +1,17 @@
 from ProductionCode.cl import *
+from cl_app import *
 import unittest
 import subprocess
 import imp
 
+stock = Stocks()
 
 class TestBasic_cl(unittest.TestCase):
+    def setUp(self):
 
-    ''' testData is the smaller dataset we will be testing on'''
-    testData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},
+        ''' testData is the smaller dataset we will be testing on'''
+
+        self.testData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},
              "GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
              "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
     
@@ -17,7 +21,7 @@ class TestBasic_cl(unittest.TestCase):
         filteredData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
                         "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
 
-        data = get_by_company(self.testData, arguments)
+        data = stock.get_by_company(arguments)
 
         self.assertEqual(data, filteredData)
 
@@ -25,7 +29,7 @@ class TestBasic_cl(unittest.TestCase):
         "This tests if an incorrect name is passed into get by company"
         arguments = "BOB"
 
-        data = get_by_company(self.testData, arguments)
+        data = stock.get_by_company(arguments, self.testData)
 
         self.assertEqual(data, {})
 
@@ -37,7 +41,7 @@ class TestBasic_cl(unittest.TestCase):
                         "GOOG" : {'2020-04-01' : "111"}, 
                         "AMZN" : {'2020-04-01' : "111"}}
         
-        data = get_by_date(self.testData, arguments)
+        data = stock.get_by_date(arguments, self.testData)
 
         self.assertEqual(data, filteredData)
 
@@ -47,7 +51,7 @@ class TestBasic_cl(unittest.TestCase):
         arguments = ["not a date"]
         filteredData = {'NFLX': {}, 'GOOG': {}, 'AMZN': {}} 
         
-        data = get_by_date(self.testData, arguments)
+        data = stock.get_by_date(arguments)
 
         self.assertEqual(data, filteredData)
 
@@ -57,7 +61,7 @@ class TestBasic_cl(unittest.TestCase):
         expected_company1 = "NFLX"
         expected_company2 = "AMZN"
 
-        code = subprocess.Popen(['python3', '-u', 'ProductionCode/stock_data.py', "--get_by_company", 'NFLX', "AMZN"],
+        code = subprocess.Popen(['python3', '-u', 'cl_app.py', "--get_by_company", 'NFLX', "AMZN"],
                                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, 
                                 encoding='utf8')
         
@@ -70,12 +74,12 @@ class TestBasic_cl(unittest.TestCase):
 
 
     def test_edge_print_data(self):
-        self.assertEquals(None, print_data(None))
+        self.assertEquals(None, stock.print_data(None))
     
 
     def test_get_all(self):
         '''Test to see if the function returns the entire dataset'''
-        test_data = get_all(self.testData)
+        test_data = stock.get_all()
 
         self.assertEqual(test_data, self.testData)
 
@@ -84,26 +88,26 @@ class TestBasic_cl(unittest.TestCase):
         '''This tests an empty data set'''
         empty_data = {}
 
-        self.assertEqual(get_all(empty_data), empty_data)
+        self.assertEqual(stock.get_all(empty_data), empty_data)
 
 
     def test_load_data(self):
         '''This tests load on the the entire data set'''
 
-        self.assertEqual(len(load()), 10)
+        self.assertEqual(len(stock.load()), 10)
 
 
     def test_load_helper(self):
         '''This tests a helper function for load'''
         sampleData = ["2020-04-01,0,0,0,0"]
-        self.assertEqual(type(load_helper(sampleData)), dict)
+        self.assertEqual(type(stock.load_helper(sampleData)), dict)
         
 
     def test_get_by_date_helper(self):
         '''This tests a helper function for get_by_date()'''
         filteredCompanyData = {}
         filteredCompanyData["NFLX"] = {}
-        get_by_date_helper(self.testData, "NFLX", [1,1,"2020-04-01"], filteredCompanyData)
+        stock.get_by_date_helper("NFLX", [1,1,"2020-04-01"], filteredCompanyData)
         self.assertEqual(filteredCompanyData, {"NFLX":{'2020-04-01' : "111"}})
 
 
@@ -111,14 +115,24 @@ class TestBasic_cl(unittest.TestCase):
         '''This tests a helper function edge case for get_by_date() - invalid date'''
         filteredCompanyData = {}
         filteredCompanyData["NFLX"] = {}
-        get_by_date_helper(self.testData, "NFLX", [1,1,"invalid_date"], filteredCompanyData)
+        stock.get_by_date_helper("NFLX", [1,1,"invalid_date"], filteredCompanyData)
         self.assertEqual(filteredCompanyData, {"NFLX":{}})
+
+    def test_predict(self):
+        '''This tests if the predict function returns correct rounded values for user inputs '''
+        userIn = {"NFLX": "1.0", "GOOG": "2.0", "AMZN": "3.0"}
+        self.assertEqual(stock.predict(userIn), (6.0, 6.0, 0.0))
+
+    def test_predict_edge(self):
+        '''This tests that non-digit inputs do not work and return 0.0'''
+        userIn = {"NFLX": "not digits", "GOOG":"not digits", "AMZN":"not digits"}
+        self.assertEqual(stock.predict(userIn), (0.0, 0.0, 0.0))
 
 
     def test_get_help(self):
         '''Test to see if the get_help function runs '''
 
-        self.assertEqual(get_help(), True)
+        self.assertEqual(stock.get_help(), True)
 
     def test_get_help_main(self):
         self.assertEquals(None, main([1, "--get_h"]))
@@ -137,7 +151,7 @@ class TestBasic_cl(unittest.TestCase):
     
     def test_name_main(self):
         #using the imp module because using import to load python functions was not working with the unittest module and coverage testing
-        runpy = imp.load_source('__main__', 'ProductionCode/stock_data.py')
+        runpy = imp.load_source('cl_app.py', 'ProductionCode/cl.py')
 
 
 if __name__ == '__main__':

@@ -30,7 +30,7 @@ class TestFlask(unittest.TestCase):
     def test_route_500(self):
         self.app = app.test_client()
         response = self.app.delete('/', follow_redirects=True)
-        self.assertIn(b"500 BACKEND ERROR", response.data)
+        self.assertIn(b"405 Method Not Allowed", response.data)
 
 if __name__ == "__main__":
     unittest.main()

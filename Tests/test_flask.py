@@ -5,27 +5,27 @@ class TestFlask(unittest.TestCase):
     def test_route_homepage(self):
         self.app = app.test_client()
         response = self.app.get('/', follow_redirects=True)
-        self.assertIn(b"Welcome", response.data)
+        self.assertIn(b"Home Page", response.data)
+
+    def test_research(self):
+        self.app = app.test_client()
+        response = self.app.get('/research', follow_redirects=True)
+        self.assertIn(b"Select company to display table", response.data)
+
+    def test_play(self):
+        self.app = app.test_client()
+        response = self.app.get('/play', follow_redirects=True)
+        self.assertIn(b"Total Money Invested: $", response.data)
 
     def test_route_help(self):
         self.app = app.test_client()
-        response = self.app.get('/get_help', follow_redirects=True)
-        self.assertIn(b"Welcome", response.data)
-
-    def test_route_company(self):
-        self.app = app.test_client()
-        response = self.app.get('/get_company/NFLX', follow_redirects=True)
-        self.assertIn(b"Welcome", response.data)
-
-    def test_route_date(self):
-        self.app = app.test_client()
-        response = self.app.get('/get_date/2020-04-01', follow_redirects=True)
-        self.assertIn(b"Welcome", response.data)
+        response = self.app.get('/help', follow_redirects=True)
+        self.assertIn(b"Error", response.data)
     
     def test_route_404(self):
         self.app = app.test_client()
-        response = self.app.get('/peepee', follow_redirects=True)
-        self.assertIn(b"ERROR", response.data)
+        response = self.app.get('/goodmorning', follow_redirects=True)
+        self.assertIn(b"Error", response.data)
 
     def test_route_500(self):
         self.app = app.test_client()

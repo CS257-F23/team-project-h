@@ -47,6 +47,7 @@ def play():
     return render_template('play.html')
 
 
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template('error.html')

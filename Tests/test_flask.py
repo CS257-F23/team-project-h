@@ -1,5 +1,5 @@
 import unittest
-from flask_app import *
+from app import *
 
 class TestFlask(unittest.TestCase):
     def test_route_homepage(self):
@@ -20,17 +20,17 @@ class TestFlask(unittest.TestCase):
     def test_route_help(self):
         self.app = app.test_client()
         response = self.app.get('/help', follow_redirects=True)
-        self.assertIn(b"Error", response.data)
+        self.assertIn(b"How to use our site:", response.data)
     
     def test_route_404(self):
         self.app = app.test_client()
         response = self.app.get('/goodmorning', follow_redirects=True)
-        self.assertIn(b"Error", response.data)
+        self.assertIn(b"404 PAGE NOT FOUND", response.data)
 
     def test_route_500(self):
         self.app = app.test_client()
         response = self.app.delete('/', follow_redirects=True)
-        self.assertIn(b"405 Method Not Allowed", response.data)
+        self.assertIn(b"500 BACKEND ERROR", response.data)
 
 if __name__ == "__main__":
     unittest.main()

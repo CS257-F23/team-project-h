@@ -14,8 +14,8 @@ def isEmpty(data):
 def homepage():
     return render_template('index.html')
 
-@app.route("/get_help")
-def get_help():
+@app.route("/help")
+def help():
     return render_template('help.html')
 
 @app.route("/research", methods=("GET", "POST"))

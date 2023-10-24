@@ -10,7 +10,6 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='play.css') }}"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -24,35 +23,13 @@
       </div>
       <div class="grid-item form-content">
         <form method="post">
-          <input type="text" id="AMZN" name="AMZN" value="0" />
-          <label for="company2">AMZN</label><br />
-  
-          <input type="text" id="CMCSA" name="CMCSA" value="0" />
-          <label for="company3">CMCSA</label><br />
-  
-          <input type="text" id="FB" name="FB" value="0" />
-          <label for="company4">FB</label><br />
-  
-          <input type="text" id="GE" name="GE" value="0" />
-          <label for="company5">GE</label><br />
-  
-          <input type="text" id="GOOG" name="GOOG" value="0" />
-          <label for="company6">GOOG</label><br />
-  
-          <input type="text" id="JPM" name="JPM" value="0" />
-          <label for="company7">JPM</label><br />
-  
-          <input type="text" id="MAR" name="MAR" value="0" />
-          <label for="company8">MAR</label><br />
-  
-          <input type="text" id="MSFT" name="MSFT" value="0" />
-          <label for="company9">MSFT</label><br />
-  
-          <input type="text" id="NFLX" name="NFLX" value="0" />
-          <label for="company10">NFLX</label><br />
-  
-          <input type="text" id="WFC" name="WFC" value="0" />
-          <label for="company11">WFC</label><br />
+          <h2>FORM</h2>
+          <p>Type in how much money you'd like to invest into each company to see the predicted gains in a year.</p>
+          {% for company in companyList %}
+          <input type="text" id="{{company}}" name="{{company}}" value="0" />
+          <label for="{{company}}">{{company}}</label><br />
+          {% endfor %}
+        
   
           <button type="submit">Submit</button>
         </form>

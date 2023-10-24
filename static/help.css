@@ -1,3 +1,4 @@
+/* general css */
 body {
   font-family: Verdana, Geneva, sans-serif;
   margin: 0px;
@@ -11,6 +12,7 @@ body {
   height: 100vh;
 }
 
+/* navigational bar */
 .navbar {
   grid-column: 1 / span 5;
   grid-row: 0.5;
@@ -18,17 +20,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.form-content {
-  flex-flow: column;
-  grid-column: 1 / span 5;
-  grid-row: 2 / span 3;
-  background-color: rgb(128, 161, 191);
-  display: flex;
-  color: #f2f2f2;
-  font-weight: bold;
-  align-items: center;
 }
 
 a {
@@ -41,6 +32,8 @@ a {
   flex: 1;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 15px;
+  text-align: center;
+  margin-left: 10px;
 }
 
 a:hover {
@@ -50,11 +43,6 @@ a:hover {
 
 .navleft {
   flex: 1;
-}
-
-a {
-  text-align: center;
-  margin-left: 10px;
 }
 
 li {

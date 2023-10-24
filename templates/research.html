@@ -22,38 +22,14 @@
     </div>
     <div class="grid-item form-content">
       <form method="post">
-        <input type="checkbox" id="company2" name="company2" value="AMZN" />
-        <label for="company2">AMZN</label><br />
-
-        <input type="checkbox" id="company3" name="company3" value="CMCSA" />
-        <label for="company3">CMCSA</label><br />
-
-        <input type="checkbox" id="company4" name="company4" value="FB" />
-        <label for="company4">FB</label><br />
-
-        <input type="checkbox" id="company5" name="company5" value="GE" />
-        <label for="company5">GE</label><br />
-
-        <input type="checkbox" id="company6" name="company6" value="GOOG" />
-        <label for="company6">GOOG</label><br />
-
-        <input type="checkbox" id="company7" name="company7" value="JPM" />
-        <label for="company7">JPM</label><br />
-
-        <input type="checkbox" id="company8" name="company8" value="MAR" />
-        <label for="company8">MAR</label><br />
-
-        <input type="checkbox" id="company9" name="company9" value="MSFT" />
-        <label for="company9">MSFT</label><br />
-
-        <input type="checkbox" id="company10" name="company10" value="NFLX" />
-        <label for="company10">NFLX</label><br />
-
-        <input type="checkbox" id="company11" name="company11" value="WFC" />
-        <label for="company11">WFC</label><br />
-
-        <textarea name="dates" placeholder="write dates here"></textarea>
-
+        <h2>FORM</h2>
+        <p>Select the companies you would like to see stock values for. The, type in a specific date in the tex bow below in the format 2019-04-01, or leave it blank to view stock values for the entire year. </p>
+        {% for company in companyList %}
+          <input type="checkbox" id="{{company}}" name="{{company}}" value="{{company}}" />
+          <label for="{{company}}">{{company}}</label><br />
+        {% endfor %}
+        <input type="text" id="dates" name="dates"/>
+        <label for="dates"></label><br />
         <button type="submit">Submit</button>
       </form>
     </div>

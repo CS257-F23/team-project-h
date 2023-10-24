@@ -21,7 +21,7 @@ class TestBasic_cl(unittest.TestCase):
         filteredData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
                         "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
 
-        data = stock.get_by_company(arguments)
+        data = stock.get_by_company(arguments, self.testData)
 
         self.assertEqual(data, filteredData)
 
@@ -37,9 +37,7 @@ class TestBasic_cl(unittest.TestCase):
     def test_get_by_date(self):
         '''This tests that get by date returns stock data for all companies on a specific date'''
         arguments = ["2020-04-01"] 
-        filteredData = {"NFLX" : {'2020-04-01' : "111"},
-                        "GOOG" : {'2020-04-01' : "111"}, 
-                        "AMZN" : {'2020-04-01' : "111"}}
+        filteredData = {"NFLX" : {"2020-04-01" : "364.08"}, "GOOG" : {"2020-04-01" : '1105.62'}, "AMZN" : {"2020-04-01" : "1907.7"} }
         
         data = stock.get_by_date(arguments, self.testData)
 
@@ -51,7 +49,7 @@ class TestBasic_cl(unittest.TestCase):
         arguments = ["not a date"]
         filteredData = {'NFLX': {}, 'GOOG': {}, 'AMZN': {}} 
         
-        data = stock.get_by_date(arguments)
+        data = stock.get_by_date(arguments, self.testData)
 
         self.assertEqual(data, filteredData)
 
@@ -75,21 +73,7 @@ class TestBasic_cl(unittest.TestCase):
 
     def test_edge_print_data(self):
         self.assertEquals(None, stock.print_data(None))
-    
-
-    def test_get_all(self):
-        '''Test to see if the function returns the entire dataset'''
-        test_data = stock.get_all()
-
-        self.assertEqual(test_data, self.testData)
-
-
-    def test_get_all_empty_data(self):
-        '''This tests an empty data set'''
-        empty_data = {}
-
-        self.assertEqual(stock.get_all(empty_data), empty_data)
-
+        
 
     def test_load_data(self):
         '''This tests load on the the entire data set'''
@@ -108,7 +92,7 @@ class TestBasic_cl(unittest.TestCase):
         filteredCompanyData = {}
         filteredCompanyData["NFLX"] = {}
         stock.get_by_date_helper("NFLX", [1,1,"2020-04-01"], filteredCompanyData)
-        self.assertEqual(filteredCompanyData, {"NFLX":{'2020-04-01' : "111"}})
+        self.assertEqual(filteredCompanyData, {"NFLX":{'2020-04-01' : "364.08"}})
 
 
     def test_edge_get_by_date_helper(self):

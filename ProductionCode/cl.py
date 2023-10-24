@@ -47,15 +47,6 @@ class Stocks():
             print(companyName + " Historical Stock Data")
             for date, value in data.items():
                 print(date, ":", value)
-        
-
-    def get_all(self):
-        """
-        This returns all the data stored in company data for all companies and all dates.   
-        """
-        self.print_data(self.allCompaniesData)
-        return self.allCompaniesData
-
 
     def get_by_company(self, arguments, filteredData = {}) -> dict:
         """Filters the all company stock data by company inputed by user
@@ -124,10 +115,13 @@ class Stocks():
         final = 0.0
         if userIn == None:
             return None
-        for companyValue in userIn:
-            if userIn[companyValue].isdigit():
+        try:
+            for companyValue in userIn:
+        
                 initial += float(userIn[companyValue])
                 factor = float(self.allCompaniesData[companyValue]["2020-04-01"]) / float(self.allCompaniesData[companyValue]["2019-04-01"])
                 final += float(userIn[companyValue]) * factor
+        except:
+            pass
         final = round(final, 2)
         return (initial, final, final-initial)

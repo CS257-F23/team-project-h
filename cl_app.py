@@ -15,8 +15,6 @@ def main(arguments):
     match arguments[1]:
         case "--get_h":
             Stock.get_help()
-        case "--get_all":
-            Stock.get_all()
         case "--get_by_company":
             data = Stock.get_by_company(arguments[2:])
         case "--get_by_date":

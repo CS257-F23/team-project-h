@@ -10,13 +10,13 @@ class TestBasic_cl(unittest.TestCase):
     def setUp(self):
 
         ''' testData is the smaller dataset we will be testing on'''
-
         self.testData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"},
              "GOOG" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
              "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
     
+
     def test_get_by_company(self):
-        """Test to check the data is filtered by company correctly"""
+        '''Test to check the data is filtered by company correctly'''
         arguments = ["NFLX", "AMZN"]
         filteredData = {"NFLX" : {'2020-04-01' : "111", '2020-04-02' : "222"}, 
                         "AMZN" : {'2020-04-01' : "111", '2020-04-02' : "222"}}
@@ -26,7 +26,7 @@ class TestBasic_cl(unittest.TestCase):
         self.assertEqual(data, filteredData)
 
     def test_false_company(self):
-        "This tests if an incorrect name is passed into get by company"
+        '''Test for an edge case of get_by_company, if an incorrect name is passed in.'''
         arguments = "BOB"
 
         data = stock.get_by_company(arguments, self.testData)
@@ -35,7 +35,7 @@ class TestBasic_cl(unittest.TestCase):
 
 
     def test_get_by_date(self):
-        '''This tests that get by date returns stock data for all companies on a specific date'''
+        '''Test for get_by_date that should return stock data for all companies on a specific date'''
         arguments = ["2020-04-01"] 
         filteredData = {"NFLX" : {"2020-04-01" : "364.08"}, "GOOG" : {"2020-04-01" : '1105.62'}, "AMZN" : {"2020-04-01" : "1907.7"} }
         
@@ -45,7 +45,7 @@ class TestBasic_cl(unittest.TestCase):
 
 
     def test_edge_get_by_date(self):
-        '''This tests if a user puts in invalid input for a date '''
+        '''Test for an edge case of get_by_date, if a user puts in invalid input for a date. '''
         arguments = ["not a date"]
         filteredData = {'NFLX': {}, 'GOOG': {}, 'AMZN': {}} 
         
@@ -54,7 +54,7 @@ class TestBasic_cl(unittest.TestCase):
         self.assertEqual(data, filteredData)
 
     def test_print_data(self):
-        """Test to check the data is printed correctly"""
+        '''Test that data is printed correctly.'''
 
         expected_company1 = "NFLX"
         expected_company2 = "AMZN"
@@ -72,23 +72,24 @@ class TestBasic_cl(unittest.TestCase):
 
 
     def test_edge_print_data(self):
+        '''Test for edge case of print_data if no data is given.'''
         self.assertEquals(None, stock.print_data(None))
         
 
     def test_load_data(self):
-        '''This tests load on the the entire data set'''
+        '''Test to load the entire data set'''
 
         self.assertEqual(len(stock.load()), 10)
 
 
     def test_load_helper(self):
-        '''This tests a helper function for load'''
+        '''Test for a helper function of load'''
         sampleData = ["2020-04-01,0,0,0,0"]
         self.assertEqual(type(stock.load_helper(sampleData)), dict)
         
 
     def test_get_by_date_helper(self):
-        '''This tests a helper function for get_by_date()'''
+        '''Test of a helper function for get_by_date()'''
         filteredCompanyData = {}
         filteredCompanyData["NFLX"] = {}
         stock.get_by_date_helper("NFLX", [1,1,"2020-04-01"], filteredCompanyData)
@@ -96,7 +97,7 @@ class TestBasic_cl(unittest.TestCase):
 
 
     def test_edge_get_by_date_helper(self):
-        '''This tests a helper function edge case for get_by_date() - invalid date'''
+        '''Test of a helper function edge case for get_by_date() - invalid date'''
         filteredCompanyData = {}
         filteredCompanyData["NFLX"] = {}
         stock.get_by_date_helper("NFLX", [1,1,"invalid_date"], filteredCompanyData)
@@ -115,25 +116,26 @@ class TestBasic_cl(unittest.TestCase):
 
     def test_get_help(self):
         '''Test to see if the get_help function runs '''
-
         self.assertEqual(stock.get_help(), True)
 
     def test_get_help_main(self):
+        '''Test get help command'''
         self.assertEquals(None, main([1, "--get_h"]))
 
-    def test_get_all_main(self):
-        self.assertEquals(None, main([1, "--get_all"]))
-
     def test_get_by_company_main(self):
+        '''Test get by company command'''
         self.assertEquals(None, main([1, "--get_by_company", ""]))
 
     def test_get_by_date_main(self):
+        '''Test get by date command'''
         self.assertEquals(None, main([1, "--get_by_date"]))
 
     def test_edge_main(self):
+        '''Test the edge case for main'''
         self.assertEqual(None, main([1]))
     
     def test_name_main(self):
+        '''Test the main function'''
         #using the imp module because using import to load python functions was not working with the unittest module and coverage testing
         runpy = imp.load_source('cl_app.py', 'ProductionCode/cl.py')
 

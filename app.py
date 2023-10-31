@@ -40,10 +40,8 @@ def research():
                 dates = userIn[inp].split(",")
                 if "" in dates:
                     dates.remove("")
-        displayData = Stock.get_by_company(companies)
-        if len(dates) >= 1:
-            displayData = Stock.get_by_date(dates, displayData)
-        if len(companies) >= 1:
+        displayData = get_data(companies, dates)
+        if not companies.isEmpty():
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)
 

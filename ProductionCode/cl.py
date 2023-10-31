@@ -1,12 +1,13 @@
 import sys
 import os
+import DataSource
 
 
 class Stocks():
     def __init__(self): 
         self.allCompaniesData = self.load()
         
-    """""
+    """
     Check, load, and setup functions are used to load the data from the Data subdictionary 
     """
 
@@ -91,6 +92,16 @@ class Stocks():
         for date in arguments: 
             if date in self.allCompaniesData[company]:
                 filteredCompanyData[company][date] = self.allCompaniesData[company][date]
+
+    def get_data(companyList, dateList):
+        data = DataSource()
+        filteredData = data.get_data(tuple(companyList), tuple(dateList))
+        companyData = {}
+        for row in filteredData:
+            if row[0] not in companyData:
+                companyData[row[0]] = {}
+            companyData[row[0]][row[1]] = row[2]
+        return companyData
 
     def get_help(self):
         """

@@ -1,6 +1,6 @@
 import psycopg2
 
-import config
+from ProductionCode.config import config as config
 
 class DataSource:
 

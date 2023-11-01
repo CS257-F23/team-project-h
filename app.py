@@ -3,7 +3,7 @@ from ProductionCode.cl import *
 
 app = Flask(__name__)
 
-Stock = Stocks()
+stock = Stocks()
 companyList = ["AMZN", "CMCSA", "FB", "GE", "GOOG" ,"JPM", "MAR", "MSFT", "NFLX", "WFC"]
 
 def isEmpty(data):
@@ -40,7 +40,7 @@ def research():
                 dates = userIn[inp].split(",")
                 if "" in dates:
                     dates.remove("")
-        displayData = get_data(companies, dates)
+        displayData = stock.get_data(companies, dates)
         if not companies.isEmpty():
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)
@@ -69,4 +69,4 @@ def bug(e):
     return render_template('500.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5108)

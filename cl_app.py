@@ -1,7 +1,9 @@
-from ProductionCode.cl import Stocks
+from ProductionCode.stocks import Stocks
 import sys 
 
 def main(arguments):
+
+    # TODO fix this to handle with database
 
     Stock = Stocks()
     #list of all company codes to be parsed

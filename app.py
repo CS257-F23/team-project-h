@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from ProductionCode.cl import *
+from ProductionCode.stocks import *
 
 app = Flask(__name__)
 
@@ -18,6 +18,7 @@ def help():
     '''Route for the help page.
        It takes no arguments. '''
     return render_template('help.html')
+
 
 @app.route("/research", methods=("GET", "POST"))
 def research():
@@ -38,6 +39,7 @@ def research():
         if not len(companies) == 0:
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)
+
 
 @app.route("/play", methods=("GET", "POST"))
 def play():

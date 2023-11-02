@@ -39,5 +39,15 @@ class TestFlask(unittest.TestCase):
         response = self.app.delete('/', follow_redirects=True)
         self.assertIn(b"405 Method Not Allowed", response.data)
 
+    def test_route_research_post(self):
+        pass
+
+    def test_route_play_post(self):
+        pass
+
+
+
+
+
 if __name__ == "__main__":
     unittest.main()

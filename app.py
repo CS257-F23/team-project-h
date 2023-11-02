@@ -6,12 +6,6 @@ app = Flask(__name__)
 stock = Stocks()
 companyList = ["AMZN", "CMCSA", "FB", "GE", "GOOG" ,"JPM", "MAR", "MSFT", "NFLX", "WFC"]
 
-def isEmpty(data):
-    '''Checks if the data is empty. 
-    It takes in data as a dictionary. '''
-    if len(data) == 0:
-        return True
-    return False
 
 @app.route("/")
 def homepage():
@@ -41,7 +35,7 @@ def research():
                 if "" in dates:
                     dates.remove("")
         displayData = stock.get_data(companies, dates)
-        if not companies.isEmpty():
+        if not len(companies) == 0:
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)
 
@@ -51,7 +45,7 @@ def play():
        User will input a value for investments for each company in the form. '''
     if request.method == "POST":
         userIn = request.form
-        values = Stock.predict(userIn)
+        values = stock.predict(userIn)
         return render_template("play.html", companyList=companyList, start=values[0], end=values[1], difference=values[2])
     return render_template('play.html', companyList=companyList)
 

@@ -1,12 +1,6 @@
 import psycopg2
 from ProductionCode.helper import * 
-
-## fix later 
-database = 'teamh'
-user = 'teamh'
-password = 'expo795phone'
-portNumbers = '5120 5230'
-
+from ProductionCode.psqlConfig import *
 
 class DataSource:
 
@@ -33,8 +27,12 @@ class DataSource:
         Return: list of tuples with (company, date, value) ''' 
 
         cursor = self.connection.cursor()
+        if isEmpty(companyTuple): ## for if user doesn't input a company 
+            return []
+            print("bruh")
         if isEmpty(dateTuple): ## for if user doesn't input a date 
             cursor.execute("select * from allstockdata where company in %s", (companyTuple,))
+            print(companyTuple)
         else:
             cursor.execute("select * from allstockdata where company in %s and date in %s", (companyTuple, dateTuple))
         fetchedData = cursor.fetchall()

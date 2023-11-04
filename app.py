@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from ProductionCode.stocks import *
+from ProductionCode.helper import *
 
 app = Flask(__name__)
 
@@ -25,21 +26,31 @@ def research():
     '''Research page that displays stock data based on user's input in the form.
        User will select companies in the form and input a date.'''
     if request.method == "POST":
-        userIn = request.form
-        companies = []
-        dates = []
-        for inp in userIn:
-            if "date" not in inp:
-                companies.append(userIn[inp])
-            else:
-                dates = userIn[inp].split(",")
-                if "" in dates:
-                    dates.remove("")
+        userInput = request.form
+        inputList = parse_user_input(userInput)
+        companies, dates = inputList[0], inputList[1]
+
         displayData = stock.get_data(companies, dates)
-        if not len(companies) == 0:
+        if not isEmpty(companies):
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)
 
+
+def parse_user_input(userInput):
+    '''Parses user input for companies and dates. 
+    Argument: User input (dictionary)
+    Returns: List of 2 lists [[companies, dates]'''
+    inputList, companies, dates = [], [], []
+    for key in userInput:
+        if "date" not in key:
+            companies.append(userInput[key])
+        else:
+            dates = userInput[key].split(",")
+            if "" in dates:
+                dates.remove("")
+    inputList.append(companies)
+    inputList.append(dates)
+    return inputList
 
 @app.route("/play", methods=("GET", "POST"))
 def play():

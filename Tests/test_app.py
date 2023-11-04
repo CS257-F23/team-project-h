@@ -1,6 +1,7 @@
 import unittest
 from app import *
 
+
 class TestFlask(unittest.TestCase):
     def test_route_homepage(self):
         '''Test for the homepage.'''
@@ -40,14 +41,38 @@ class TestFlask(unittest.TestCase):
         self.assertIn(b"405 Method Not Allowed", response.data)
 
     def test_route_research_post(self):
-        pass
+        '''Tests the research page if the user selects NFLX in the form; should return a closing value for one of the dates.'''
+        self.app = app.test_client()
+        response = self.app.post('/research', follow_redirects = True, data ={"NFLX": "NFLX"})
+        self.assertIn(b"366.96", response.data) 
+
 
     def test_route_play_post(self):
-        pass
+        '''Tests the play page if the user inputs 1000 for AMZN; should return the calculated value for the investment after a year.'''
+        self.app = app.test_client()
+        response = self.app.post('/play', follow_redirects = True, data ={"AMZN": "1000"})
+        self.assertIn(b"Result after a year: $1051.54", response.data)
+
+    def test_parse_user_input(self):
+        '''Test parse_user_input() function; should return a list of companies and dates'''
+        userInput = {"NFLX": "NFLX", "AMZN": "AMZN", "date": "2020-04-01"}
+
+        expectedResult = [["NFLX", "AMZN"],["2020-04-01"]]
+
+        result = parse_user_input(userInput)
+
+        self.assertEqual(result, expectedResult)
 
 
+    def test_parse_user_input_edge(self):
+        '''Test edge case of parse_user_input() function; should return a list of two empty lists'''
+        userInput = {}
 
+        expectedResult = [[],[]]
 
+        result = parse_user_input(userInput)
+
+        self.assertEqual(result, expectedResult)
 
 if __name__ == "__main__":
     unittest.main()

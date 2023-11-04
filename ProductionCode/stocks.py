@@ -35,6 +35,16 @@ class Stocks():
         companyList = ["AMZN", "CMCSA", "FB", "GE", "GOOG" ,"JPM", "MAR", "MSFT", "NFLX", "WFC"]
         return self.get_data(companyList, ())
 
+    def get_help(self):
+        """
+        This function helps the user use the app. 
+        """
+        printStatement = ("\n¯\_(ツ)_/¯ \n Hey! To print out all stocks for a specific company, type in --get_company [company name]" +
+            "\n To print out stocks for a company on by a specific date, type in --get_on_date [company name] [date]" +
+            "\n These are the possible company names: NFLX, GOOG, AMZN, MSFT, FB, GE, CMCSA, WFC, MAR, JPM" +
+            "\n This is the possible data range: 2019-04-01 - 2020-04-01.\n")
+        return printStatement
+
     
     def predict(self, userIn):
         '''Purpose: This function predicts how much the stocks will earn/lose based on user investment.

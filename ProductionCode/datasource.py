@@ -29,7 +29,6 @@ class DataSource:
         cursor = self.connection.cursor()
         if isEmpty(companyTuple): ## for if user doesn't input a company 
             return []
-            print("bruh")
         if isEmpty(dateTuple): ## for if user doesn't input a date 
             cursor.execute("select * from allstockdata where company in %s", (companyTuple,))
             print(companyTuple)

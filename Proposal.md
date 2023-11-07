@@ -19,7 +19,11 @@
 
 Some of the team members have experience building websites, so they are good resources for everyone. We want to collaborate with each other to learn from one another and build a great project. Everyone in the groupchat can request to hold an extra meeting in addition to the weekly-scheduled one. 
 
-**What are the rules that will guide your team?** 
+- Devin is in charge of get\_by\_company
+- Dexter is in charge of get\_by\_date 
+- Lucy and Alisa are in charge of get\_all and get\_help 
+- We will work together to load and organize the data and to implement the main function. 
+
 
 **Features** 
 
@@ -53,12 +57,8 @@ Usage:
 
 Users will be able to look up specific stock information based on a company or date they are interested in. 
 
-- Devin is in charge of get\_by\_company
-- Dexter is in charge of get\_by\_date 
-- Lucy and Alisa are in charge of get\_all and get\_help 
-- We will work together to load and organize the data and to implement the main function. 
 
-<!---->
+**What are the rules that will guide your team?** 
 
 - We plan to meet every week on Tuesday at 2 p.m for an hour. 
 - We also have a Discord server to give each other quick updates or set up more time to meet. Communication on the server will be more professional than casual to ensure respectfulness.

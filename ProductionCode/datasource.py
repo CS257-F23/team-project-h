@@ -31,7 +31,6 @@ class DataSource:
             return []
         if isEmpty(dateTuple): ## for if user doesn't input a date 
             cursor.execute("select * from allstockdata where company in %s", (companyTuple,))
-            print(companyTuple)
         else:
             cursor.execute("select * from allstockdata where company in %s and date in %s", (companyTuple, dateTuple))
         fetchedData = cursor.fetchall()

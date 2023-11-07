@@ -45,7 +45,7 @@ class TestBasic_cl(unittest.TestCase):
         compList = ["not a company"]
         dateList = ["not a date"]
         result = stock.get_data(compList, dateList)
-        expectedResult = {}
+        expectedResult = -1
         self.assertEqual(result, expectedResult)
 
 

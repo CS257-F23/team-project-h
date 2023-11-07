@@ -11,9 +11,11 @@ class Stocks():
         '''
         data = DataSource()
         filteredData = data.fetch_data(tuple(companyList), tuple(dateList))
+        if isEmpty(filteredData):
+            return -1
         return self.format_data(filteredData)
 
-    
+
     def format_data(self, filteredData): ## helper function of get_data()
         ''' Purpose: formats the data
         Arguments: data (list of tuples) 

@@ -12,12 +12,12 @@
 
 - Devin: I am familiar with HTML, and CSS, but not Python.
 - Dexter: Python, flask, data visualization, and database modeling. 
-- Lucy: I am a good listener and I am willing to resolve disagreements. I am also pretty confident in my learning ability.   test.
+- Lucy: I am a good listener and I am willing to resolve disagreements. I am also pretty confident in my learning ability.
 - Alisa: I have good artistic skills and am good at making artistic decisions. 
 
 **How will we capitalize on the strengths of each member?**
 
-Some of the team members have experience building websites, so they are good resources for everyone. We want to collaborate with each other to learn from one another and build a great project. Everyone in the groupchat can request to hold an extra meeting in addition to the weekly-scheduled one. 
+Davin and Dexter have experience building websites, so they will be a tool for the rest of the team when working with the database. Lucy will help us in resolving disagreements when we cannot come to a decision. She will make sure our team meets consistently, and that everyone can request additional meetings if they need help. Alisa will help design the look of the site when working with front-end components.  
 
 - Devin is in charge of get\_by\_company
 - Dexter is in charge of get\_by\_date 

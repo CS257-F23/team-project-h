@@ -3,8 +3,7 @@ import sys
 
 def main(arguments):
     '''Purpose: Cl app with 3 features: print all stocks for a specific comapny, print stocks for a company on a specific date, or help users use the app.
-    Arguments: takes in command line arguments. 
-    '''
+    Arguments: takes in command line arguments. '''
     
     stock = Stocks()
 

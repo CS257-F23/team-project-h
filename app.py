@@ -31,8 +31,6 @@ def research():
         companies, dates = inputList[0], inputList[1]
 
         displayData = stock.get_data(companies, dates)
-        # if displayData == -1: fix later for invalid input 
-        #     check = True
         if not isEmpty(companies):
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)

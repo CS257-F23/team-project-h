@@ -36,8 +36,8 @@ class TestBasic_cl(unittest.TestCase):
     def test_get_all_data(self):
         '''Purpose: Test for get_all_data(); should return 10 dictionaries (1 for each company), and 254 dictionaries for each company. '''
         result = stock.get_all_data()
-        self.assertEquals(len(result), 10) 
-        self.assertEquals(len(result["GOOG"]), 254)
+        self.assertEqual(len(result), 10) 
+        self.assertEqual(len(result["GOOG"]), 254)
 
 
     def test_get_data_edge(self):
@@ -45,7 +45,7 @@ class TestBasic_cl(unittest.TestCase):
         compList = ["not a company"]
         dateList = ["not a date"]
         result = stock.get_data(compList, dateList)
-        expectedResult = -1
+        expectedResult = {}
         self.assertEqual(result, expectedResult)
 
 

@@ -11,8 +11,6 @@ class Stocks():
         '''
         data = DataSource()
         filteredData = data.fetch_data(tuple(companyList), tuple(dateList))
-        if isEmpty(filteredData):
-            return -1
         return self.format_data(filteredData)
 
 

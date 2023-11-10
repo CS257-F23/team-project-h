@@ -8,15 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='index.css') }}"
+      href="{{ url_for('static', filename='help.css') }}"
     />
   </head>
   <body>
-    <div class="main">
-      <h1>500 BACKEND ERROR</h1>
-      <div class="buttons">
-        <a href="/">Back to Homepage</a>
+    <div class="grid-container">
+      <div class="grid-item navbar">
+        <div class="navleft">
+          <a href="/">Home</a>
+          <a href="/research">Research</a>
+          <a href="/play">Play</a>
+          <a href="/help">Help</a>
+        </div>
       </div>
-    </div>
+      <div class="form-content">
+          <h1>500 Internal Error</h1>
+      </div>
   </body>
 </html>

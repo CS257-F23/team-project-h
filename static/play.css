@@ -4,6 +4,7 @@ body {
   margin: 0px;
 }
 
+/* grid for each section of the site */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -22,6 +23,7 @@ body {
   justify-content: center;
 }
 
+/* buttons in the nav bar */
 a {
   color: #ffffff;
   background-color: rgb(128, 161, 191);
@@ -70,7 +72,8 @@ a:hover {
   place-items: center;
 }
 
-h1, h4 {
+/* text */
+h1, h2 {
   padding: 12px 15px;
   background-color: rgb(128, 161, 191);
   color: white;

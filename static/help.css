@@ -3,6 +3,7 @@ body {
   margin: 0px;
 }
 
+/* grid for each section of the site */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -11,6 +12,7 @@ body {
   height: 100vh;
 }
 
+/* navigation bar */
 .navbar {
   grid-column: 1 / span 5;
   grid-row: 0.5;
@@ -20,6 +22,7 @@ body {
   justify-content: center;
 }
 
+/* form */
 .form-content {
   flex-flow: column;
   grid-column: 1 / span 5;
@@ -31,16 +34,19 @@ body {
   align-items: center;
 }
 
+/* buttons in the nav bar */
 a {
   color: #ffffff;
   background-color: rgb(128, 161, 191);
   padding: 14px 16px;
   margin-bottom: 20px;
+  margin-left: 10px;
   text-decoration: none;
   font-weight: bold;
   flex: 1;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 15px;
+  text-align: center;
 }
 
 a:hover {
@@ -52,11 +58,7 @@ a:hover {
   flex: 1;
 }
 
-a {
-  text-align: center;
-  margin-left: 10px;
-}
-
+/* list of instructions */
 li {
   margin: 10px 0;
 }

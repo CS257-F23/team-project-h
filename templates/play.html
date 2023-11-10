@@ -23,7 +23,7 @@
       </div>
       <div class="grid-item form-content">
         <form method="post">
-          <h2>FORM</h2>
+          <h1>FORM</h1>
           <p>Type in how much money you'd like to invest into each company to see the predicted gains in a year.</p>
           {% for company in companyList %}
           <input type="text" id="{{company}}" name="{{company}}" value="0" />
@@ -36,9 +36,9 @@
       </div>
       <div class="grid-item data-content">
        
-        <h4>Total Money Invested: ${{start}}</h4>
-        <h4>Result after a year: ${{end}}</h4>
-        <h4>Difference: ${{difference}}</h4>
+        <h2>Total Money Invested: ${{start}}</h2>
+        <h2>Result after a year: ${{end}}</h2>
+        <h2>Difference: ${{difference}}</h2>
         
       </div>
     </div>

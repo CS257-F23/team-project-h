@@ -29,8 +29,8 @@ def research():
         userInput = request.form
         inputList = parse_user_input(userInput)
         companies, dates = inputList[0], inputList[1]
-
         displayData = stock.get_data(companies, dates)
+
         if not isEmpty(companies):
             return render_template("research.html", companyList=companyList, companyData = displayData, company=companies[0])
     return render_template('research.html', companyList=companyList)
@@ -39,14 +39,14 @@ def research():
 def parse_user_input(userInput):
     '''Parses user input for companies and dates. 
     Argument: User input (dictionary)
-    Returns: List of 2 lists [[companies, dates]'''
+    Returns: List of 2 lists [[companies], [dates]]'''
     inputList, companies, dates = [], [], []
     for key in userInput:
-        if "date" not in key:
+        if "date" not in key: 
             companies.append(userInput[key])
         else:
             dates = userInput[key].split(",")
-            if "" in dates:
+            if "" in dates: #if user doesn't input a date
                 dates.remove("")
     inputList.append(companies)
     inputList.append(dates)
@@ -54,7 +54,7 @@ def parse_user_input(userInput):
 
 @app.route("/play", methods=("GET", "POST"))
 def play():
-    '''Play page that predicts investment gains based on the user's input. The route takes HTTP methods.
+    '''Play page that predicts investment gains based on the user's input.
        User will input a value for investments for each company in the form. '''
     if request.method == "POST":
         userIn = request.form
@@ -76,4 +76,4 @@ def bug(e):
     return render_template('500.html')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5108)
+    app.run(port=5108)

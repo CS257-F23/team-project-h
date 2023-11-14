@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from ProductionCode.stocks import *
+from ProductionCode.predict import *
 from ProductionCode.helper import *
 
 app = Flask(__name__)
@@ -56,9 +57,10 @@ def parse_user_input(userInput):
 def play():
     '''Play page that predicts investment gains based on the user's input.
        User will input a value for investments for each company in the form. '''
+    predict = Predict()
     if request.method == "POST":
         userIn = request.form
-        values = stock.predict(userIn)
+        values = predict.predict(userIn)
         return render_template("play.html", companyList=companyList, start=values[0], end=values[1], difference=values[2])
     return render_template('play.html', companyList=companyList)
 

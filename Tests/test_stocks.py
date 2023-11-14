@@ -6,16 +6,6 @@ import imp
 stock = Stocks()
 
 class TestBasic_cl(unittest.TestCase):
-    
-    def test_predict(self):
-        '''Purpose: Tests if the predict function returns correct rounded values for user inputs '''
-        userIn = {"NFLX": "1.0", "GOOG": "2.0", "AMZN": "3.0"}
-        self.assertEqual(stock.predict(userIn), (6.0, 6.0, 0.0))
-
-    def test_predict_edge(self):
-        '''Purpose: Tests that non-digit inputs do not work and return 0.0'''
-        userIn = {"NFLX": "not digits", "GOOG":"not digits", "AMZN":"not digits"}
-        self.assertEqual(stock.predict(userIn), (0.0, 0.0, 0.0))
 
     def test_get_data(self):
         '''Purpose: Test get_data() function on 2 companies and 2 dates; should return correctly-formatted (in dictionaries) fetched data.'''

@@ -16,7 +16,7 @@ body {
 .navbar {
   grid-column: 1 / span 5;
   grid-row: 0.5;
-  background-color: rgb(217, 201, 250);
+  background-color: #576CBC;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@ body {
   flex-flow: column;
   grid-column: 1 / span 5;
   grid-row: 2 / span 3;
-  background-color: rgb(128, 161, 191);
+  background-color: #0B2447;
   display: flex;
   color: #f2f2f2;
   font-weight: bold;

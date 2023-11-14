@@ -32,7 +32,7 @@ class TestFlask(unittest.TestCase):
         '''Test for the 404 page, given a user enters an invalid url. '''
         self.app = app.test_client()
         response = self.app.get('/goodmorning', follow_redirects=True)
-        self.assertIn(b"404 PAGE NOT FOUND", response.data)
+        self.assertIn(b"404 Page Not Found", response.data)
 
     def test_route_500(self):
         '''Test for the 500 page, given a backend error. '''

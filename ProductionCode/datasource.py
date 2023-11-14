@@ -23,16 +23,30 @@ class DataSource:
 
     def fetch_data(self, companyTuple, dateTuple):
         ''' Arguments: takes in tuple of companies and tuple of dates based on user's form input 
-        Purpose: Makes queries based on user's input of companies and dates
+        Purpose: Fetch data from queries based on user's input 
         Return: list of tuples with (company, date, value) ''' 
-
-        cursor = self.connection.cursor()
-        if isEmpty(companyTuple): ## for if user doesn't input a company 
-            return []
-        if isEmpty(dateTuple): ## for if user doesn't input a date 
-            cursor.execute("select * from allstockdata where company in %s", (companyTuple,))
+        if isEmpty(dateTuple): 
+            return self.fetch_only_companies(companyTuple)
         else:
-            cursor.execute("select * from allstockdata where company in %s and date in %s", (companyTuple, dateTuple))
+            return self.fetch_companies_and_dates(companyTuple, dateTuple)
+
+    def fetch_only_companies(self, companyTuple):
+        '''Arguments: takes in a tuple of companies 
+        Purpose: Executes a query for companies in the tuple. 
+        Return: list of tuples with data from the query '''
+        cursor = self.connection.cursor()
+        cursor.execute("select * from allstockdata where company in %s", (companyTuple,))
         fetchedData = cursor.fetchall()
         cursor.close()
-        return fetchedData 
+        return fetchedData
+    
+    def fetch_companies_and_dates(self, companyTuple, dateTuple):
+        '''Arguments: takes in tuples of companies and of dates
+        Purpose: Executes a query for companies in the tuple. 
+        Return: list of tuples with data from the query '''
+        cursor = self.connection.cursor()
+        cursor.execute("select * from allstockdata where company in %s and date in %s", (companyTuple, dateTuple))
+        fetchedData = cursor.fetchall()
+        cursor.close()
+        return fetchedData
+    

@@ -9,6 +9,8 @@ class Stocks():
         ''' Purpose: Fetches data from the query based on a list of companies and dates. 
         Arguments: list of companies and list of dates from the user 
         '''
+        if isEmpty(companyList):  
+            return []
         data = DataSource()
         filteredData = data.fetch_data(tuple(companyList), tuple(dateList))
         return self.format_data(filteredData)

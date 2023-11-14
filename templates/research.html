@@ -22,8 +22,9 @@
     </div>
     <div class="grid-item form-content">
       <form method="post">
-        <h1>FORM</h1>
-        <p>Select the companies you would like to see stock values for. The, type in a specific date in the tex bow below in the format 2019-04-01, or leave it blank to view stock values for the entire year. </p>
+        <h1>Options</h1>
+        <p>Select the companies you would like to see stock values for. Then type in a specific date in the text box 
+          below in the format 2019-04-01, or leave it blank to view stock values for the entire year. </p>
         {% for company in companyList %}
           <input type="checkbox" id="{{company}}" name="{{company}}" value="{{company}}" />
           <label for="{{company}}">{{company}}</label><br />

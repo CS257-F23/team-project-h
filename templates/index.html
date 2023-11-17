@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Home</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <h1>Stock Data</h1>
+      <h2>Home Page</h2>
+      <p>
+        Interactive investing application! 
+        We have the stock data of 10 companies that Carleton is investing in. 
+        Learn about them and see how much money you could earn by investing in them. 
+      </p>
+      <div class="buttons">
+        <a href="/research">Research</a>
+        <a href="/play">Play</a>
+        <a href="/help">Help</a>
+      </div>
+    </div>
+  </body>
+</html>

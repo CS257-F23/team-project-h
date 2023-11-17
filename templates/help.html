@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='help.css') }}"
+    />
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item navbar">
+        <div class="navleft">
+          <a href="/">Home</a>
+          <a href="/research">Research</a>
+          <a href="/play">Play</a>
+          <a href="/help">Help</a>
+        </div>
+      </div>
+      <div class="form-content">
+        <h1>How to use our site:</h1>
+        <br>
+        <ul>
+          <li>Research: Look up stock data for different companies that are listed.</li>
+          <li>Play: Enter what stocks to invest into and get a report based on the input.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

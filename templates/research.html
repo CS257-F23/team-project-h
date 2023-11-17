@@ -25,12 +25,13 @@
         <h1>Options</h1>
         <p>Select the companies you would like to see stock values for. Then type in a specific date in the text box 
           below in the format 2019-04-01, or leave it blank to view stock values for the entire year. </p>
-        {% for company in companyList %}
-          <input type="checkbox" id="{{company}}" name="{{company}}" value="{{company}}" />
-          <label for="{{company}}">{{company}}</label><br />
+        {% for key, values in companyList.items() %}
+          <input type="checkbox" id="{{key}}" name="{{key}}" value="{{key}}" />
+          <label for="{{key}}">{{values}}</label><br />
         {% endfor %}
+        <p></p>
+        <label for="dates">Enter Date: </label><br />
         <input type="text" id="dates" name="dates"/>
-        <label for="dates"></label><br />
         <button type="submit">Submit</button>
       </form>
     </div>

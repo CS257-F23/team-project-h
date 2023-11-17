@@ -25,11 +25,11 @@
         <form method="post">
           <h1>Invest</h1>
           <p>Type in how much money you'd like to invest into each company to see the predicted gains in a year.</p>
-          {% for company in companyList %}
-          <input type="text" id="{{company}}" name="{{company}}" value="0" />
-          <label for="{{company}}">{{company}}</label><br />
+          {% for key, values in companyList.items() %}
+          <input type="text" id="{{key}}" name="{{key}}" value="0" />
+          <label for="{{key}}">{{values}}</label><br />
           {% endfor %}
-        
+          <p></p>
   
           <button type="submit">Submit</button>
         </form>

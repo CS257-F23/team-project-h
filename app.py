@@ -6,7 +6,7 @@ from ProductionCode.helper import *
 app = Flask(__name__)
 
 stock = Stocks()
-companyList = ["AMZN", "CMCSA", "FB", "GE", "GOOG" ,"JPM", "MAR", "MSFT", "NFLX", "WFC"]
+companyList = {"AMZN": "Amazon", "CMCSA": "Comcast", "FB": "Facebook", "GE": "General Electric", "GOOG": "Google","JPM": "JPMorgan", "MAR": "Marriott", "MSFT" : "Microsoft", "NFLX": "Netflix", "WFC": "Wells Fargo"}
 
 
 @app.route("/")
@@ -78,4 +78,4 @@ def bug(e):
     return render_template('500.html')
 
 if __name__ == "__main__":
-    app.run(port=5108)
+    app.run(host="0.0.0.0", debug=False, port=5108)
